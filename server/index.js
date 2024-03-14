@@ -1,10 +1,13 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+dotenv.config();
+
 const Book = require('./models/bookModel');
 
-const PORT = 8000;
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -16,7 +19,7 @@ app.use(express.json());
 
 // connecting to MongoDB database
 mongoose
-  .connect(`your-connection-string`)
+  .connect(process.env.MONGODB_STRING)
   .then(console.log('Connected to Database'))
   .catch((err) => console.log(err));
 
